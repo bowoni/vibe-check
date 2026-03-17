@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-sp-black: var(--sp-black);
+  --color-sp-dark: var(--sp-dark);
+  --color-sp-card: var(--sp-card);
+  --color-sp-elevated: var(--sp-elevated);
+  --color-sp-disabled: var(--sp-disabled);
+  --color-sp-green: var(--sp-green);
+  --color-sp-green-light: var(--sp-green-light);
+  --color-sp-white: var(--sp-white);
+  --color-sp-sub: var(--sp-sub);
+  --color-sp-muted: var(--sp-muted);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --sp-black: #000000;
+  --sp-dark: #121212;
+  --sp-card: #181818;
+  --sp-elevated: #282828;
+  --sp-disabled: #3E3E3E;
+  --sp-green: #1DB954;
+  --sp-green-light: #1ED760;
+  --sp-white: #FFFFFF;
+  --sp-sub: #B3B3B3;
+  --sp-muted: #6A6A6A;
+}
+
+[data-theme="light"] {
+  --sp-black: #F5F5F5;
+  --sp-dark: #FFFFFF;
+  --sp-card: #F0F0F0;
+  --sp-elevated: #E0E0E0;
+  --sp-disabled: #CCCCCC;
+  --sp-white: #191414;
+  --sp-sub: #535353;
+  --sp-muted: #999999;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--sp-elevated) 25%, var(--sp-disabled) 50%, var(--sp-elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

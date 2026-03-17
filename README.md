@@ -1,7 +1,7 @@
 # 🎧 Spotify
 > Spotify Web API를 활용한 감정과 날씨로 찾는 나만의 플레이리스트
 
-![demo](./public/demo.gif)
+<!-- ![demo](./public/demo.gif) -->
 
 <br>
 
@@ -135,22 +135,25 @@ vibe-check
  ┃ ┃ ┃ ┗ 📂me
  ┃ ┃ ┃   ┗ 📜route.ts          # 현재 유저 프로필 조회
  ┃ ┃ ┗ 📂spotify
- ┃ ┃   ┗ 📂playlists
- ┃ ┃     ┗ 📜route.ts          # 기분/날씨 기반 플레이리스트 검색
+ ┃ ┃   ┣ 📂playlists
+ ┃ ┃   ┃ ┗ 📜route.ts          # 기분/날씨 기반 플레이리스트 검색
+ ┃ ┃   ┗ 📂recommendations
+ ┃ ┃     ┗ 📜route.ts          # 기분/날씨 기반 트랙 추천
  ┃ ┣ 📂components
  ┃ ┃ ┣ 📜HomeScreen.tsx         # 랜딩 페이지 (로그인/시작)
  ┃ ┃ ┣ 📜MoodSelectionScreen.tsx # 감정 및 날씨 선택 화면
  ┃ ┃ ┣ 📜ResultScreen.tsx       # 추천 플레이리스트 결과 화면
  ┃ ┃ ┗ 📜HistoryScreen.tsx      # 감정 진단 히스토리 화면
+ ┃ ┣ 📂lib
+ ┃ ┃ ┣ 📜spotify.ts             # Spotify 토큰 관리 및 재시도 fetch 유틸
+ ┃ ┃ ┣ 📜supabase.ts            # Supabase 클라이언트
+ ┃ ┃ ┣ 📜history.ts             # 히스토리 데이터 레이어
+ ┃ ┃ ┣ 📜constants.ts           # 감정/날씨 공유 상수
+ ┃ ┃ ┗ 📜theme.tsx              # 다크/라이트 모드 ThemeProvider
  ┃ ┣ 📜page.tsx                 # 메인 페이지 (화면 상태 관리)
  ┃ ┣ 📜layout.tsx               # 루트 레이아웃
  ┃ ┣ 📜globals.css              # 글로벌 스타일
  ┃ ┗ 📜favicon.ico
- ┣ 📂styles
- ┃ ┣ 📜index.css                # 스타일 진입점
- ┃ ┣ 📜fonts.css                # 폰트 설정
- ┃ ┣ 📜tailwind.css             # Tailwind 임포트
- ┃ ┗ 📜theme.css                # 테마 변수
  ┣ 📂public
  ┃ ┗ 📜demo.gif                 # 데모 이미지
  ┣ 📜package.json
@@ -308,27 +311,28 @@ const emotions = [
 ### 5-1 우선 순위별 개선항목
 
 1) 히스토리 기능 고도화
-- [ ] 현재 mock 데이터로 표시되는 히스토리를 실제 데이터베이스 연동으로 전환
-- [ ] 감정 진단 결과를 저장하고 월별/감정별 통계 데이터 집계 기능 구현
+- [x] 현재 mock 데이터로 표시되는 히스토리를 실제 데이터베이스 연동으로 전환
+- [x] 감정 진단 결과를 저장하고 월별/감정별 통계 데이터 집계 기능 구현
+- [x] 월별 진단 횟수를 월별/주별/일별 선택해 조회되게 전환
 
 2) Token Refresh 로직 구현
-- [ ] Access Token 만료 시 Refresh Token을 활용한 자동 갱신 로직 추가
-- [ ] 토큰 만료 감지 및 사용자에게 재로그인 안내 UX 개선
+- [x] Access Token 만료 시 Refresh Token을 활용한 자동 갱신 로직 추가
+- [x] 토큰 만료 감지 및 사용자에게 재로그인 안내 UX 개선
 
 3) 추천 알고리즘 개선
-- [ ] 현재 키워드 기반 검색을 Spotify Recommendations API로 확장하여 정밀도 향상
-- [ ] 사용자 청취 이력 기반 개인화된 추천 로직 추가
+- [x] 현재 키워드 기반 검색을 Spotify Recommendations API로 확장하여 정밀도 향상
+- [x] 사용자 청취 이력 기반 개인화된 추천 로직 추가
 
 4) 에러 핸들링 강화
-- [ ] Spotify API 응답 실패 시 재시도 로직 및 사용자 친화적 에러 메시지 개선
-- [ ] 네트워크 오류, 토큰 만료 등 케이스별 분기 처리
+- [x] Spotify API 응답 실패 시 재시도 로직 및 사용자 친화적 에러 메시지 개선
+- [x] 네트워크 오류, 토큰 만료 등 케이스별 분기 처리
 
 ### 5-2 그 외 항목
 
 1) UI 개선
-- [ ] 플레이리스트 미리듣기(Preview) 기능 추가
-- [ ] 다크/라이트 모드 토글 지원
-- [ ] 로딩 시 Skeleton UI 적용
+- [x] 플레이리스트 미리듣기(Preview) 기능 추가
+- [x] 다크/라이트 모드 토글 지원
+- [x] 로딩 시 Skeleton UI 적용
 
 2) 기능 확장
 - [ ] 추천 결과를 Spotify 플레이리스트로 직접 저장하는 기능

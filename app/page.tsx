@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Home, Clock } from 'lucide-react';
+import { Home, Clock, Sun, Moon } from 'lucide-react';
+import { useTheme } from './lib/theme';
 import { HomeScreen } from './components/HomeScreen';
 import { MoodSelectionScreen } from './components/MoodSelectionScreen';
 import { ResultScreen } from './components/ResultScreen';
@@ -17,6 +18,7 @@ interface SpotifyUser {
 }
 
 export default function App() {
+  const { theme, toggleTheme } = useTheme();
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
   const [selectedMood, setSelectedMood] = useState('');
   const [selectedWeather, setSelectedWeather] = useState('');
@@ -42,15 +44,11 @@ export default function App() {
   const handleRetry = () => setCurrentScreen('mood-selection');
   const handleBackToHome = () => setCurrentScreen('home');
 
+  const isHome = currentScreen === 'home' || currentScreen === 'mood-selection' || currentScreen === 'result';
+
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4"
-      style={{ backgroundColor: '#000000', fontFamily: 'Inter, sans-serif' }}
-    >
-      <div
-        className="relative w-full max-w-[440px] h-[100dvh] md:h-[calc(100dvh-2rem)] md:max-h-[850px] rounded-none md:rounded-3xl overflow-hidden border-0 md:border"
-        style={{ backgroundColor: '#121212', borderColor: '#282828' }}
-      >
+    <div className="min-h-screen flex items-center justify-center p-4 bg-sp-black font-sans">
+      <div className="relative w-full max-w-[440px] h-[100dvh] md:h-[calc(100dvh-2rem)] md:max-h-[850px] rounded-none md:rounded-3xl overflow-hidden border-0 md:border bg-sp-dark border-sp-elevated">
         <div className="h-full pb-20 overflow-hidden">
           {currentScreen === 'home' && (
             <HomeScreen onStart={handleStart} user={user} authLoading={authLoading} />
@@ -70,22 +68,11 @@ export default function App() {
         </div>
 
         {/* Bottom Navigation */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-20 border-t"
-          style={{ backgroundColor: '#121212', borderColor: '#282828' }}
-        >
+        <div className="absolute bottom-0 left-0 right-0 h-20 border-t bg-sp-dark border-sp-elevated">
           <div className="flex items-center justify-around h-full px-8">
             <button
               onClick={() => setCurrentScreen('home')}
-              className="flex flex-col items-center gap-1 transition-colors"
-              style={{
-                color:
-                  currentScreen === 'home' ||
-                  currentScreen === 'mood-selection' ||
-                  currentScreen === 'result'
-                    ? '#1DB954'
-                    : '#6A6A6A',
-              }}
+              className={`flex flex-col items-center gap-1 transition-colors ${isHome ? 'text-sp-green' : 'text-sp-muted'}`}
             >
               <Home size={24} />
               <span className="text-xs font-medium">홈</span>
@@ -93,14 +80,19 @@ export default function App() {
             <button
               onClick={() => user && setCurrentScreen('history')}
               disabled={!user}
-              className="flex flex-col items-center gap-1 transition-colors"
-              style={{
-                color: !user ? '#3E3E3E' : currentScreen === 'history' ? '#1DB954' : '#6A6A6A',
-                cursor: !user ? 'not-allowed' : 'pointer',
-              }}
+              className={`flex flex-col items-center gap-1 transition-colors ${
+                !user ? 'text-sp-disabled cursor-not-allowed' : currentScreen === 'history' ? 'text-sp-green' : 'text-sp-muted cursor-pointer'
+              }`}
             >
               <Clock size={24} />
               <span className="text-xs font-medium">히스토리</span>
+            </button>
+            <button
+              onClick={toggleTheme}
+              className="flex flex-col items-center gap-1 transition-colors text-sp-muted"
+            >
+              {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+              <span className="text-xs font-medium">{theme === 'dark' ? '라이트' : '다크'}</span>
             </button>
           </div>
         </div>

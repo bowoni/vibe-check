@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get('code');
@@ -40,7 +42,10 @@ export async function GET(req: NextRequest) {
 
   const tokens = await tokenResponse.json();
 
-  const response = NextResponse.redirect(appUrl);
+  const response = new NextResponse(null, {
+    status: 302,
+    headers: { Location: appUrl },
+  });
 
   response.cookies.set('spotify_access_token', tokens.access_token, {
     httpOnly: true,

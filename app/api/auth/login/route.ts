@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export function GET() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
@@ -13,6 +15,7 @@ export function GET() {
   const scopes = [
     'user-read-private',
     'user-read-email',
+    'user-top-read',
   ].join(' ');
 
   const params = new URLSearchParams({
@@ -21,6 +24,7 @@ export function GET() {
     redirect_uri: redirectUri,
     state,
     scope: scopes,
+    show_dialog: 'true',
   });
 
   const authUrl = `https://accounts.spotify.com/authorize?${params}`;
