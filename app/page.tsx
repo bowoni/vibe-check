@@ -47,8 +47,8 @@ export default function App() {
   const isHome = currentScreen === 'home' || currentScreen === 'mood-selection' || currentScreen === 'result';
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-sp-black font-sans">
-      <div className="relative w-full max-w-[440px] h-[100dvh] md:h-[calc(100dvh-2rem)] md:max-h-[850px] rounded-none md:rounded-3xl overflow-hidden border-0 md:border bg-sp-dark border-sp-elevated">
+    <div className="min-h-screen flex items-center justify-center p-2 md:p-4 bg-sp-black font-sans">
+      <div className="relative w-full max-w-[440px] h-[calc(100dvh-1rem)] md:h-[calc(100dvh-2rem)] md:max-h-[850px] rounded-2xl md:rounded-3xl overflow-hidden border border-sp-elevated bg-sp-dark">
         <div className="h-full pb-20 overflow-hidden">
           {currentScreen === 'home' && (
             <HomeScreen onStart={handleStart} user={user} authLoading={authLoading} />
