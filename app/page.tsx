@@ -49,7 +49,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex items-center justify-center p-2 md:p-4 bg-sp-black font-sans">
       <div className="relative w-full max-w-[440px] h-[calc(100dvh-1rem)] md:h-[calc(100dvh-2rem)] md:max-h-[850px] rounded-2xl md:rounded-3xl overflow-hidden border border-sp-elevated bg-sp-dark">
-        <div className="h-full pb-20 overflow-hidden">
+        <div className="h-full pb-16 overflow-hidden">
           {currentScreen === 'home' && (
             <HomeScreen onStart={handleStart} user={user} authLoading={authLoading} />
           )}
@@ -68,8 +68,8 @@ export default function App() {
         </div>
 
         {/* Bottom Navigation */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 border-t bg-sp-dark border-sp-elevated">
-          <div className="flex items-center justify-around h-full px-8">
+        <div className="absolute bottom-0 left-0 right-0 border-t bg-sp-dark border-sp-elevated pb-[env(safe-area-inset-bottom)]">
+          <div className="flex items-center justify-around h-16 px-8">
             <button
               onClick={() => setCurrentScreen('home')}
               className={`flex flex-col items-center gap-1 transition-colors ${isHome ? 'text-sp-green' : 'text-sp-muted'}`}

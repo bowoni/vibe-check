@@ -48,7 +48,7 @@ export function getMonthlyStats(history: HistoryEntry[], year: number) {
       return hd.getFullYear() === year && hd.getMonth() === month;
     }).length;
 
-    result.push({ label: `${month + 1}월`, count });
+    result.push({ label: `${month + 1}`, count });
   }
 
   return result;

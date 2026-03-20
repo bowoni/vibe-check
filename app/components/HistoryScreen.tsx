@@ -250,9 +250,10 @@ export function HistoryScreen({}: HistoryScreenProps) {
           <BarChart data={chartData} barCategoryGap="30%">
             <XAxis
               dataKey="label"
-              tick={{ fill: '#6A6A6A', fontSize: 11 }}
+              tick={{ fill: '#6A6A6A', fontSize: 10 }}
               axisLine={false}
               tickLine={false}
+              interval={0}
             />
             <YAxis
               tick={{ fill: '#6A6A6A', fontSize: 11 }}
